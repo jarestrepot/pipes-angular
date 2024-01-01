@@ -16,16 +16,16 @@
     ></p-button>
   </div>
   <div class="p-toolbar-group-end gap-4">
-    <p-button label="By name" icon="pi pi-sort" styleClass="p-button-success mr-2"></p-button>
-    <p-button label="Can fly" icon="pi pi-sort" styleClass="p-button-danger"></p-button>
-    <p-button label="By Color" icon="pi pi-sort" styleClass="p-button-help"></p-button>
+    <p-button (click)="changeOrder( 'name' )" label="By name" icon="pi pi-sort" styleClass="p-button-success mr-2"></p-button>
+    <p-button (click)="changeOrder( 'canFly' )" label="Can fly" icon="pi pi-sort" styleClass="p-button-danger"></p-button>
+    <p-button (click)="changeOrder( 'color' )" label="By Color" icon="pi pi-sort" styleClass="p-button-help"></p-button>
   </div>
 </p-toolbar>
 
 <div class="grid mt-4">
   <div class="col-12">
     <p-panel header="Heroes">
-      <p-table [value]="heroes" [tableStyle]="{ 'min-width': '50rem' }">
+      <p-table [value]="heroes | sortBy:orderBy" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
           <tr>
             <th>Name</th>
@@ -36,7 +36,7 @@
         <ng-template pTemplate="body" let-hero>
           <tr>
             <td>{{ hero.name }}</td>
-            <td>{{ hero.canFly }}</td>
+            <td>{{ hero.canFly | canfly | titlecase }}</td>
             <td>{{ hero.color }}</td>
           </tr>
         </ng-template>
